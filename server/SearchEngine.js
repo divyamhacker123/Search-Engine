@@ -6,7 +6,7 @@ class TrieNode {
     this.isEndOfWord = false;
   }
 }
-
+// Search Engine class
 class SearchEngine {
   constructor() {
     this.trieRoot = new TrieNode();
