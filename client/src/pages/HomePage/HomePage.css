@@ -337,3 +337,70 @@ body {
     margin: 0 10px;
   }
 }
+
+/* --- Google-Style Search Results --- */
+.google-style-results {
+  width: 100%;
+  max-width: 652px; /* Standard Google result width */
+  margin: 30px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Space between results */
+  text-align: left;
+}
+
+.google-result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result-url-container {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #dadce0; /* Adjust if using light mode (e.g., #202124) */
+}
+
+.result-url {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-title {
+  font-size: 20px;
+  color: #8ab4f8; /* Classic Google Blue for Dark Mode. Use #1a0dab for Light Mode */
+  margin: 0;
+  font-weight: 400;
+  cursor: pointer;
+  line-height: 1.3;
+}
+
+.result-title:hover {
+  text-decoration: underline;
+}
+
+.result-content-expanded {
+  margin-top: 4px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.result-snippet {
+  font-size: 14px;
+  color: #bdc1c6; /* Use #4d5156 for Light Mode */
+  line-height: 1.58;
+  margin: 0 0 8px 0;
+}
+
+.result-score {
+  font-size: 12px;
+  color: #9aa0a6;
+  font-style: italic;
+}
+
+/* Optional: Smooth fade in for the accordion content */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
