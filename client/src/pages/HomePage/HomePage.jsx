@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
+import SignInButton from './SignInButton'; // Adjust path if you put it in a components folder
 
 const HomePage = () => {
   const [query, setQuery] = useState('');
@@ -41,6 +42,11 @@ const HomePage = () => {
 
   return (
     <div className="home-container">
+      {/* Top Navigation for Sign In Button */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '15px 20px', width: '100%', boxSizing: 'border-box' }}>
+        <SignInButton />
+      </div>
+
       <main className="home-main">
         <div className="logo">
           <span className="logo-blue">S</span>

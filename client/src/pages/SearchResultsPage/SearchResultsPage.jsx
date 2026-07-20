@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import '../HomePage/HomePage.css'; 
+import SignInButton from './SignInButton'; // Adjust path based on your folder structure
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -35,27 +36,35 @@ const SearchResultsPage = () => {
   return (
     <div className="results-page-container">
       {/* Top Navigation Bar */}
-      <header className="results-header" style={{ display: 'flex', padding: '20px', alignItems: 'center', borderBottom: '1px solid #ebebeb' }}>
-        <h2 style={{ margin: '0 20px 0 0', cursor: 'pointer' }} onClick={() => navigate('/')}>
-          <span style={{color: '#4285F4'}}>S</span>
-          <span style={{color: '#EA4335'}}>e</span>
-          <span style={{color: '#FBBC05'}}>a</span>
-          <span style={{color: '#4285F4'}}>r</span>
-          <span style={{color: '#34A853'}}>c</span>
-          <span style={{color: '#EA4335'}}>h</span>
-        </h2>
-        <div style={{ position: 'relative' }}>
-          <input 
-            type="text" 
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            onKeyDown={handleNewSearch}
-            style={{ 
-              width: '400px', padding: '10px 40px 10px 15px', borderRadius: '24px', 
-              border: '1px solid #dfe1e5', backgroundColor: '#303134', color: 'white', outline: 'none' 
-            }}
-          />
+      <header className="results-header" style={{ display: 'flex', padding: '20px', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #ebebeb' }}>
+        
+        {/* Left side: Logo and Search Bar */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <h2 style={{ margin: '0 20px 0 0', cursor: 'pointer' }} onClick={() => navigate('/')}>
+            <span style={{color: '#4285F4'}}>S</span>
+            <span style={{color: '#EA4335'}}>e</span>
+            <span style={{color: '#FBBC05'}}>a</span>
+            <span style={{color: '#4285F4'}}>r</span>
+            <span style={{color: '#34A853'}}>c</span>
+            <span style={{color: '#EA4335'}}>h</span>
+          </h2>
+          <div style={{ position: 'relative' }}>
+            <input 
+              type="text" 
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={handleNewSearch}
+              style={{ 
+                width: '400px', padding: '10px 40px 10px 15px', borderRadius: '24px', 
+                border: '1px solid #dfe1e5', backgroundColor: '#303134', color: 'white', outline: 'none' 
+              }}
+            />
+          </div>
         </div>
+
+        {/* Right side: Sign In Button */}
+        <SignInButton />
+        
       </header>
 
       {/* Search Results */}
