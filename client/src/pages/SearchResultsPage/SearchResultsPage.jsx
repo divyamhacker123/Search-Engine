@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import '../HomePage/HomePage.css'; 
-import SignInButton from './SignInButton'; // Adjust path based on your folder structure
+import SignInButton from '../../components/SignInButton/SearchEngineAuth.jsx'; 
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -62,34 +62,26 @@ const SearchResultsPage = () => {
           </div>
         </div>
 
-        {/* Right side: Sign In Button */}
         <SignInButton />
         
       </header>
-
-      {/* Search Results */}
       <main style={{ padding: '20px 150px' }}>
         <p style={{ color: '#9aa0a6', fontSize: '14px' }}>About {results.length} results</p>
         
         <div className="google-style-results">
           {results.map((result) => {
-            // Generate the true Wikipedia link
             const wikiUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(result.title.replace(/ /g, '_'))}`;
 
             return (
               <div key={result.id} className="google-result-card" style={{ marginBottom: '25px' }}>
-                
-                {/* URL Breadcrumb */}
                 <div className="result-url-container">
                   <span className="result-url">https://en.wikipedia.org › wiki › {result.title.replace(/\s+/g, '_')}</span>
                 </div>
-                
-                {/* Clickable Title */}
+            
                 <a href={wikiUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                   <h3 className="result-title">{result.title}</h3>
                 </a>
                 
-                {/* Snippet */}
                 <p className="result-snippet" style={{ color: '#bdc1c6', fontSize: '14px', marginTop: '4px' }}>
                   {result.content}
                 </p>

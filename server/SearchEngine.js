@@ -9,23 +9,26 @@ class SearchEngine {
   constructor() {
     this.trieRoot = new TrieNode();
     this.invertedIndex = new Map(); 
-    // Map structure: { "word": [{ docId: 1, frequency: 3 }, { docId: 2, frequency: 1 }] }
-    this.documents = new Map(); // Store original docs for retrieval
+    this.documents = new Map();
   }
 
   tokenize(text) {
+    if (!text) return [];
     return text.toLowerCase().match(/\b\w+\b/g) || [];
   }
 
   addDocument(docId, title, content) {
-    this.documents.set(docId, { title, content });
+    if (!docId || !title) return;
     
-    const words = this.tokenize(title + " " + content);
+    const safeContent = content || "";
+    this.documents.set(docId, { title, content: safeContent });
+    
+    const words = this.tokenize(title + " " + safeContent);
     const wordCounts = new Map();
 
     for (const word of words) {
       wordCounts.set(word, (wordCounts.get(word) || 0) + 1);
-      this._insertIntoTrie(word); // Feed word to Autocomplete
+      this._insertIntoTrie(word);
     }
 
     for (const [word, frequency] of wordCounts.entries()) {
@@ -48,6 +51,8 @@ class SearchEngine {
   }
 
   getAutocompleteSuggestions(prefix, limit = 5) {
+    if (!prefix) return [];
+    
     let current = this.trieRoot;
     const prefixLower = prefix.toLowerCase();
     
@@ -57,6 +62,7 @@ class SearchEngine {
     }
 
     const suggestions = [];
+    
     const dfs = (node, currentWord) => {
       if (suggestions.length >= limit) return;
       if (node.isEndOfWord) suggestions.push(currentWord);
@@ -69,6 +75,7 @@ class SearchEngine {
     dfs(current, prefixLower);
     return suggestions;
   }
+
   search(query) {
     const queryWords = this.tokenize(query);
     if (queryWords.length === 0) return [];
@@ -86,7 +93,6 @@ class SearchEngine {
       }
     }
 
-    // Sort documents by score descending
     const rankedResults = Array.from(docScores.entries())
       .sort((a, b) => b[1] - a[1])
       .map(([docId, score]) => ({
