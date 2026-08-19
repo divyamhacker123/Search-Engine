@@ -9,8 +9,11 @@ const topics = [
 ];
 
 const wikiHeaders = {
-    "User-Agent": "MyCustomSearchEngine/1.0 (contact@example.com)"
+    "User-Agent": "MyCustomSearchEngine/1.0 (divyam.hata1@gmail.com)"
 };
+
+// 1. Create a simple sleep helper function
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function loadWikipediaArticles() {
     console.log("Loading Wikipedia articles...");
@@ -38,8 +41,12 @@ async function loadWikipediaArticles() {
             
             count++;
             console.log(`Indexed: ${page.title}`);
+            
+            // 2. Add a delay at the end of each loop iteration (e.g., 1000 milliseconds / 1 second)
+            await sleep(1000); 
+
         } catch (err) {
-            console.log("Failed:", topic, err.message);
+            console.log("Failed:", topic, err);
         }
     }
     console.log(`\nFinished indexing ${count} Wikipedia articles.\n`);
